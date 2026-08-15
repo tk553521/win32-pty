@@ -92,27 +92,3 @@ win32-pty/
 ├── agent.cordis.yml      # 复制 minimal + terminal-bash.shellPath 指向 Git Bash
 └── preset.yml            # 显示名「极简模式（Windows Git Bash）」
 ```
-
-## 启用步骤
-
-1. `~/.dsh/profiles/web/package.json` 的 `dependencies` 声明
-   `"@dsh-desktop/win32-pty": "file:F:/搞事情/dshplugins/win32-pty"` 并 `pnpm install`。
-2. `~/.dsh/profiles/web/cordis.patch.yml` 追加 `insert` 行注册插件
-   （Cordis HMR 可热加载，但**代码更新仍需重启**）。
-3. 重启 DSH，会话预设选「极简模式（Windows Git Bash）」或直接用极简模式
-   （shellPath 由插件兜底修正）。
-
-Git 装在非标准位置时，改 `~/.dsh/.agent-presets/win32-minimal/agent.cordis.yml`
-里的 `shellPath` 即可（可用 `lib/index.js` 导出的 `resolveGitBash()` 探测）。
-
-## 卸载
-
-1. 从 `~/.dsh/profiles/web/cordis.patch.yml` 移除 insert 行，
-   `package.json` 移除依赖，`pnpm install`。
-2. 删除 `~/.dsh/.agent-presets/win32-minimal/`。
-
-## 测试
-
-模拟宿主环境（cordis Context + LocalSubprocessRuntime + `apply(ctx)`）验证：
-PTY 启动 / inspectForeground / 命令执行 / SIGINT 中断（shell 存活、prompt 恢复、
-可继续执行）/ terminate，覆盖沙箱包装与 `/bin/bash` 场景，全部通过。
