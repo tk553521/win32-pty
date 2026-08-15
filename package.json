@@ -1,0 +1,12 @@
+{
+  "name": "@dsh-desktop/win32-pty",
+  "version": "0.1.0",
+  "description": "DSH 插件：让极简模式（persistent PTY bash）在 Windows 上可用——注入 win32 进程检查器，SIGINT 改为 Ctrl+C 字节注入。",
+  "type": "module",
+  "main": "./lib/index.js",
+  "exports": {
+    ".": "./lib/index.js",
+    "./package.json": "./package.json"
+  },
+  "license": "MIT"
+}
