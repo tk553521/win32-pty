@@ -1,0 +1,7 @@
+# win32-pty bundle patch: insert the plugin row into the config tree.
+# The row loads the package as a service; its apply(ctx) hooks
+# ctx.subprocess (win32 terminal inspector, sandbox unwrap, shell path
+# fix, SIGINT -> Ctrl+C injection) when the platform is win32.
+- insert:
+    - id: win32-pty
+      name: '@dsh-desktop/win32-pty'
