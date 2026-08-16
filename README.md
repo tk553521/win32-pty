@@ -48,10 +48,10 @@ node_modules，符合 DSH 万物皆插件的设计哲学。
    `ctx.subprocess.spawnTerminal`，覆盖返回 handle 的 `signalForeground`
    （只调公开的 `handle.write`，不碰内部字段）。
 
-> ⚠️ 修改插件代码后需要**重启 DSH** 才生效：Cordis HMR 只热重应用
-> `cordis.patch.yml` 的 patch 列表（新增/停用插件行），不会重载已加载模块的
-> 代码；且 pnpm 对 `file:` 依赖是**复制安装**，改完源文件后需重新
-> `pnpm install` 或手动同步 `~/.dsh/profiles/web/node_modules/@dsh-desktop/win32-pty/`。
+> ⚠️ 修改插件代码后仍需要**重启 DSH**（或重新安装/同步 node_modules）才生效：
+> Cordis HMR 只热重应用 `cordis.patch.yml` 的 patch 列表，不会重载 node_modules
+> 里已加载模块的代码。插件自身已注册 `ctx.effect` 清理，所以面板里的热禁用/启用
+> 不需要重启；但直接改 `lib/index.js` 后仍要重启/重装。
 
 ## 已知现象：可稳定复现的 "we need" 思维链
 
